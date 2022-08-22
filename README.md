@@ -8,13 +8,14 @@
 Now with wordlist you can create a perfect password list
 
 # What's special? 
-> What is special about these tools and what drives you to use them instead of the rest? 
+> What is special about these tool and what drives you to use them instead of the rest? 
+> 
 > Strength, flexibility and smoothness while avoiding mistakes and a simple appearance
 > That's not enough features? Of course it's not enough, you need the best.
 > WhLet's explain the features. 
 ## Features
 
-* Smooth appearance (succulent on the image below)
+* Smooth appearance 
 
 * Constant updates
 
