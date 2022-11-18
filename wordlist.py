@@ -1,5 +1,5 @@
 from random import choice
-from os import system as UI
+from os import system as UX
 numbers = "0123456789"
 ABC = "ABCDEFGHIJKLMNOPQRSTYVWXYZ"
 abc = "abcdefghijklmnopqrstyvwxyz"
@@ -8,7 +8,7 @@ Abc123 = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789"
 ABcd = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 Abc123symbols = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789@#$&(_-=%*':/!?+÷;`]}><{[^¡¿~™®©¢¥€£¶§×`)"
 print("\033[;31;m\033[;5;m")
-UI("cat logo/logo.txt")
+UX("cat logo/logo.txt")
 print("\033[;37;m")
 password = []
 try:
@@ -36,10 +36,11 @@ try:
         except ValueError:
             print("\033[;31;m│\n│\n├── \033[;37;m\033[;41;mEnter number!\033[;40;m")
     while True:
-        name_file = input("\033[;32;m\033[;5;m│\n│\n├── Enter name save file [Ex:pass.txt]\n│\n│\n╰────▶\033[;33;m\033[;5;m")
+        name_file = str(input("\033[;32;m\033[;5;m│\n│\n├── Enter name save file [Ex:pass.txt]\n│\n│\n╰────▶\033[;33;m\033[;5;m"))
+        if name_file == "":
+            name_file = "pass.txt"
         if name_file[-4:] != ".txt":
             name_file += ".txt"
-            break
         break
     def run(data,num,length,name_file):
         f = open(name_file,"w")
