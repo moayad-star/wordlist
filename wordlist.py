@@ -1,3 +1,7 @@
+# check version
+from sys import version
+if int(version[0]) < 3:
+    exit(f"{R}For the best experience, \nwe recommend using the latest version of Python")
 from random import choice
 from os import system as UX
 numbers = "0123456789"
