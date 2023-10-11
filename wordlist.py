@@ -1,77 +1,95 @@
-from random import choice
-from os import system as UX
-numbers = "0123456789"
-ABC = "ABCDEFGHIJKLMNOPQRSTYVWXYZ"
-abc = "abcdefghijklmnopqrstyvwxyz"
-symbol = "@#$&(_-=%*':/!?+÷;`]}><{[^¡¿~™®©¢¥€£¶§×`)"
-Abc123 = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789"
-ABcd = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-Abc123symbols = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789@#$&(_-=%*':/!?+÷;`]}><{[^¡¿~™®©¢¥€£¶§×`)"
-print("\033[;31;m\033[;5;m")
-UX("cat logo/logo.txt")
-print("\033[;37;m")
-password = []
-try:
-    while True:
-        select = input("""\033[;32;m\033[;5;m
+import os
+import random
+import readline
 
-╭── Choose the password \033[;31;mformat\033[;32;m
-│
-├─ [1] \033[;31;m1234... \033[;32;m [default]
-├─ [2] \033[;31;mABCD... \033[;32;m
-├─ [3] \033[;31;mabcd... \033[;32;m
-├─ [4] \033[;31;mABcd... \033[;32;m
-├─ [5] \033[;31;m@#$&... \033[;32;m
-├─ [6] \033[;31;mAc23... \033[;32;m
-├─ [7] \033[;31;mAb3&... \033[;32;m
-│
-╰────▶\033[;33;m """)
-        if select in "123456":
-            break
+# Define constants for color formatting
+RED_COLOR = "\033[0;31m"
+GREEN_COLOR = "\033[0;32m"
+YELLOW_COLOR = "\033[0;33m"
+WHITE_COLOR = "\033[0;37m"
+BOLD_TEXT = "\033[5;1m"
+BACKGROUND_RED = "\033[41m"
+RESET_FORMAT = "\033[0m"
+
+# Define password formats
+PASSWORD_FORMATS = {
+    '1': "0123456789",
+    '2': "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    '3': "abcdefghijklmnopqrstuvwxyz",
+    '4': "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+    '5': "@#$&(_-=%*':/!?+÷;`]}><{[^¡¿~™®©¢¥€£¶§×`",
+    '6': "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+    '7': "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$&(_-=%*':/!?+÷;`]}><{[^¡¿~™®©¢¥€£¶§×`"
+}
+
+def main():
+    print(f"{RED_COLOR}{BOLD_TEXT}")
+    os.system("cat logo/logo.txt")
+    print(f"{WHITE_COLOR}")
+
+    password_format = get_password_format()
+    num_passwords, password_length = get_password_info()
+    output_file = get_file_name()
+
+    generated_passwords = generate_passwords(password_format, num_passwords, password_length, output_file)
+    save_passwords(output_file, generated_passwords)
+
+def get_password_format():
+    while True:
+        select = input(f"{GREEN_COLOR}{BOLD_TEXT}\n╭── Choose the password format\n│\n"
+                       f"├─ [1] {RED_COLOR}1234... {GREEN_COLOR}\n"
+                       f"├─ [2] {RED_COLOR}ABCD... {GREEN_COLOR}\n"
+                       f"├─ [3] {RED_COLOR}abcd... {GREEN_COLOR}\n"
+                       f"├─ [4] {RED_COLOR}ABcd... {GREEN_COLOR}\n"
+                       f"├─ [5] {RED_COLOR}@#$&... {GREEN_COLOR}\n"
+                       f"├─ [6] {RED_COLOR}Ac23... {GREEN_COLOR}\n"
+                       f"├─ [7] {RED_COLOR}Ab3&... {GREEN_COLOR}\n"
+                       f"│\n╰────▶{YELLOW_COLOR} ")
+        if select in PASSWORD_FORMATS:
+            return select
+
+def get_password_info():
     while True:
         try:
-            num_while = int(input("\033[;32;m\033[;5;m│\n│\n├── How many passwords do you need ? [Ex:1000]\n│\n│\n╰────▶\033[;33;m\033[;5;m "))
-            length_pass = int(input("\033[;32;m\033[;5;m│\n│\n├── How long is password ? [Ex:8]\n│\n│\n╰────▶\033[;33;m\033[;5;m "))
-            break
+            num_passwords = int(input(f"{GREEN_COLOR}{BOLD_TEXT}│\n│\n├── How many passwords do you need ? [Ex:1000]\n│\n│\n"
+                                    f"╰────▶{YELLOW_COLOR}{BOLD_TEXT} "))
+            password_length = int(input(f"{GREEN_COLOR}{BOLD_TEXT}│\n│\n├── How long is password ? [Ex:8]\n│\n│\n"
+                                       f"╰────▶{YELLOW_COLOR}{BOLD_TEXT} "))
+            return num_passwords, password_length
         except ValueError:
-            print("\033[;31;m│\n│\n├── \033[;37;m\033[;41;mEnter number!\033[;40;m")
+            print(f"{RED_COLOR}{BOLD_TEXT}│\n│\n├── {WHITE_COLOR}{BACKGROUND_RED}Enter a number!{RESET_FORMAT}")
+
+def get_file_name():
     while True:
-        name_file = str(input("\033[;32;m\033[;5;m│\n│\n├── Enter name save file [Ex:pass.txt]\n│\n│\n╰────▶\033[;33;m\033[;5;m"))
-        if name_file == "":
-            name_file = "pass.txt"
-        if name_file[-4:] != ".txt":
-            name_file += ".txt"
-        break
-    def run(data,num,length,name_file):
-        f = open(name_file,"w")
-        number_while = 0
-        while True:
-            password_ram = ""
-            for i in range(length):
-                password_ram += choice(data)    
-            if password_ram not in password:
-                password.append(password_ram)
-                f.writelines(f"{password_ram}\n")
-                print(f"\033[;32;m│\n├── {password_ram}")
-                number_while += 1
-            if number_while >= num: 
-                print(f"│\n╰────⎙ Saved as {name_file}")
-                break
-    if select == "1":
-        run(numbers,num_while,length_pass,name_file)
-    elif select == "2":
-        run(ABC,num_while,length_pass,name_file)
-    elif select == "3":
-        run(abc,num_while,length_pass,name_file)
-    elif select == "4":
-        run(ABcd,num_while,length_pass,name_file)
-    elif select == "5":
-        run(symbol,num_while,length_pass,name_file)
-    elif select == "6":
-        run(Abc123,num_while,length_pass,name_file)
-    elif select == "7":
-        run(Abc123symbols,num_while,length_pass,name_file)
-    else :
-        run(numbers,num_while,length_pass,name_file)
-except KeyboardInterrupt:
-    exit("\033[;31;m│\n│\n│\n├─── sudden stop!\n│\n╰─── Exit...\033[;37;m")
+        output_file = input(f"{GREEN_COLOR}{BOLD_TEXT}│\n│\n├── Enter the filename to save passwords [Ex: pass.txt]\n│\n│\n"
+                            f"╰────▶{YELLOW_COLOR}{BOLD_TEXT}")
+        if output_file == "":
+            output_file = "pass.txt"
+        if output_file[-4:] != ".txt":
+            output_file += ".txt"
+        return output_file
+
+def generate_passwords(password_format, num_passwords, password_length, output_file):
+    characters = PASSWORD_FORMATS[password_format]
+    passwords = set()
+
+    count = 0
+    while count < num_passwords:
+        password = "".join(random.choice(characters) for _ in range(password_length))
+        if password not in passwords:
+            passwords.add(password)
+            print(f"{GREEN_COLOR}{BOLD_TEXT}│\n├── {YELLOW_COLOR}{password}")
+            count += 1
+
+    print(f"{GREEN_COLOR}│\n╰────⎙ Saved as {output_file}")
+    return passwords
+
+def save_passwords(output_file, passwords):
+    with open(output_file, "w") as file:
+        file.writelines("\n".join(passwords))
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        exit(f"{RED_COLOR}{BOLD_TEXT}│\n│\n│\n├── Sudden stop!\n│\n╰── Exit...{WHITE_COLOR}")
