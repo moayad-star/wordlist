@@ -6,7 +6,7 @@
 
 
 
-![wordlist](https://user-images.githubusercontent.com/60769512/185989117-67e6908a-7575-4f13-9aff-29ea106175f3.jpg)
+![wordlist](assets/wordlist.jpg)
 # wordlist 
 
 Now with wordlist you can create a perfect password list
@@ -42,7 +42,7 @@ Is that enough? . No, we're working on more
 
 
 
-![options](https://user-images.githubusercontent.com/60769512/185991457-a0f6ef68-93cf-489e-bade-63057dfcf42b.jpg)
+![options](assets/options.jpg)
 
 ## Install (linux,termux)
 
