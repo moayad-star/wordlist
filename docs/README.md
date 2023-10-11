@@ -6,7 +6,7 @@
 
 
 
-![wordlist](assets/wordlist.jpg)
+![wordlist](/assets/wordlist.jpg)
 # wordlist 
 
 Now with wordlist you can create a perfect password list
@@ -39,10 +39,7 @@ Is that enough? . No, we're working on more
 
 ## Patterns
 
-
-
-
-![options](assets/options.jpg)
+![options](/assets/options.jpg)
 
 ## Install (linux,termux)
 
@@ -69,10 +66,6 @@ not forget , you can update from
 ```
 python3 update.py
 ```
-
-
-
-
 ## Use
 ```
 python3 wordlist.py 
@@ -83,12 +76,14 @@ python3 wordlist.py
 >>>> Choose the name of the save file
 >>>>> Have you seen? Very easy
 
+## NOTE
 
+> [!WARNING]
+> Files written in C are not as efficient as Python due to lack of experience, so I recommend using Python
 
 ### you have problem ?
 
-> Go to (Issues) option at the top of the page 
-> and pose your problem
+> Go to [Issues](https://github.com/moayad-star/wordlist/issues) option at the top of the page and pose your problem
 
 
 
